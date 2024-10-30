@@ -1,35 +1,41 @@
-class OrderProcessor {
-    public void processOrder() {
-        System.out.println("Order processed.");
+class ProductCatalog {
+    public void showProducts() {
+        System.out.println("Displaying all products.");
     }
 }
 
-class PaymentGateway {
-    public void processPayment() {
-        System.out.println("Payment processed.");
+class Cart {
+    public void addItem(String product) {
+        System.out.println(product + " added to cart.");
     }
 }
 
-class ShippingService {
-    public void shipProduct() {
-        System.out.println("Product shipped.");
+class OrderProcessing {
+    public void placeOrder() {
+        System.out.println("Order placed successfully.");
     }
 }
 
 class ECommerceFacade {
-    private OrderProcessor orderProcessor;
-    private PaymentGateway paymentGateway;
-    private ShippingService shippingService;
+    private ProductCatalog catalog;
+    private Cart cart;
+    private OrderProcessing orderProcessing;
 
     public ECommerceFacade() {
-        orderProcessor = new OrderProcessor();
-        paymentGateway = new PaymentGateway();
-        shippingService = new ShippingService();
+        catalog = new ProductCatalog();
+        cart = new Cart();
+        orderProcessing = new OrderProcessing();
     }
 
-    public void placeOrder() {
-        orderProcessor.processOrder();
-        paymentGateway.processPayment();
-        shippingService.shipProduct();
+    public void browseProducts() {
+        catalog.showProducts();
+    }
+
+    public void addToCart(String product) {
+        cart.addItem(product);
+    }
+
+    public void checkout() {
+        orderProcessing.placeOrder();
     }
 }
