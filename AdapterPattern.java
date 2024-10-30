@@ -1,23 +1,22 @@
-
-class LegacyPaymentProcessor {
-    public void payAmount(double amount) {
-        System.out.println("Paying " + amount + " using legacy system.");
-    }
-}
-
-interface PaymentProcessor {
+interface PaymentGateway {
     void processPayment(double amount);
 }
 
-class PaymentAdapter implements PaymentProcessor {
-    private LegacyPaymentProcessor legacyProcessor;
+class ThirdPartyPaymentService {
+    public void makePayment(double amount) {
+        System.out.println("Payment of $" + amount + " processed by third-party service.");
+    }
+}
 
-    public PaymentAdapter(LegacyPaymentProcessor legacyProcessor) {
-        this.legacyProcessor = legacyProcessor;
+class PaymentAdapter implements PaymentGateway {
+    private ThirdPartyPaymentService paymentService;
+
+    public PaymentAdapter(ThirdPartyPaymentService service) {
+        this.paymentService = service;
     }
 
     @Override
     public void processPayment(double amount) {
-        legacyProcessor.payAmount(amount);
+        paymentService.makePayment(amount);
     }
 }
