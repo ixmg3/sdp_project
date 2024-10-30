@@ -2,50 +2,36 @@ interface Command {
     void execute();
 }
 
-class Light {
-    public void on() {
-        System.out.println("Light is ON");
-    }
+class AddToCartCommand implements Command {
+    private Cart cart;
+    private String product;
 
-    public void off() {
-        System.out.println("Light is OFF");
-    }
-}
-
-class LightOnCommand implements Command {
-    private Light light;
-
-    public LightOnCommand(Light light) {
-        this.light = light;
+    public AddToCartCommand(Cart cart, String product) {
+        this.cart = cart;
+        this.product = product;
     }
 
     @Override
     public void execute() {
-        light.on();
+        cart.addItem(product);
     }
 }
 
-class LightOffCommand implements Command {
-    private Light light;
+class CheckoutCommand implements Command {
+    private OrderProcessing orderProcessing;
 
-    public LightOffCommand(Light light) {
-        this.light = light;
+    public CheckoutCommand(OrderProcessing orderProcessing) {
+        this.orderProcessing = orderProcessing;
     }
 
     @Override
     public void execute() {
-        light.off();
+        orderProcessing.placeOrder();
     }
 }
 
-class RemoteControl {
-    private Command command;
-
-    public void setCommand(Command command) {
-        this.command = command;
-    }
-
-    public void pressButton() {
+class CommandInvoker {
+    public void executeCommand(Command command) {
         command.execute();
     }
 }
