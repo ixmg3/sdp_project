@@ -5,16 +5,16 @@ interface Observer {
     void update(String message);
 }
 
-class UserObserver implements Observer {
+class CustomerObserver implements Observer {
     private String name;
 
-    public UserObserver(String name) {
+    public CustomerObserver(String name) {
         this.name = name;
     }
 
     @Override
     public void update(String message) {
-        System.out.println(name + " received notification: " + message);
+        System.out.println(name + ", " + message);
     }
 }
 
